@@ -1,7 +1,7 @@
 ﻿namespace TP_WindForm
 {
     partial class Form1
-    {
+    {   ///Prueba uno
         /// <summary>
         /// Variable del diseñador necesaria.
         /// </summary>
