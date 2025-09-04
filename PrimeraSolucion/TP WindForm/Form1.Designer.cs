@@ -2,6 +2,7 @@
 {
     partial class Form1
     {   ///Prueba uno
+        /// prueba commit 
         /// <summary>
         /// Variable del diseñador necesaria.
         /// </summary>
