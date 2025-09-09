@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Negocio;
 
 namespace TP_WindForm
 {
@@ -15,6 +16,19 @@ namespace TP_WindForm
         public FrmArticuloListado()
         {
             InitializeComponent();
+        }
+
+        private void FrmArticuloListado_Load(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                dgvArticulos.DataSource = negocio.listarArticulo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
