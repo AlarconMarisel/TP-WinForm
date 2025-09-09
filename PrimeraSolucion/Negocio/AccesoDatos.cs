@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio;
 
 namespace Negocio
 {
@@ -28,7 +29,7 @@ namespace Negocio
         public void SetearConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta; 
+            comando.CommandText = consulta;
         }
         public void EjecutarLectura()
         {
@@ -36,12 +37,12 @@ namespace Negocio
             try
             {
                 conexion.Open();
-                lector=comando.ExecuteReader();
+                lector = comando.ExecuteReader();
 
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
         }

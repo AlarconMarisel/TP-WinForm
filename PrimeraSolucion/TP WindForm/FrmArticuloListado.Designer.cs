@@ -85,7 +85,7 @@
             // 
             // FrmArticuloListado
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 450);
             this.Controls.Add(this.btnVerDetalleArticulo);
@@ -100,6 +100,11 @@
             this.Text = "Listado de Articulos";
             this.Load += new System.EventHandler(this.FrmArticuloListado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "FrmArticuloListado";
+            this.Text = "FrmArticuloListado";
+            this.Load += new System.EventHandler(this.FrmArticuloListado_Load);
             this.ResumeLayout(false);
 
         }

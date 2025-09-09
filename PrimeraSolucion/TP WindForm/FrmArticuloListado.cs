@@ -20,6 +20,7 @@ namespace TP_WindForm
 
         private void FrmArticuloListado_Load(object sender, EventArgs e)
         {
+
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
@@ -29,6 +30,7 @@ namespace TP_WindForm
             {
                 MessageBox.Show(ex.ToString());
             }
+
         }
     }
 }
