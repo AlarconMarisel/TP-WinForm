@@ -37,7 +37,8 @@ namespace TP_WindForm
 
         private void listadoDeMarcasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            FrmListaMarca formMarca = new FrmListaMarca();
+            formMarca.ShowDialog();
 
         }
 

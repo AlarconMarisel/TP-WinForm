@@ -22,5 +22,15 @@ namespace TP_WindForm
             MarcaNegocio datos = new MarcaNegocio();
             DgvListaDeMarcas.DataSource = datos.ListaMarca();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
