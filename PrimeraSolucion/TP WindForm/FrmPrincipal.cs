@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
+using Negocio;
 
 namespace TP_WindForm
 {
@@ -27,6 +28,22 @@ namespace TP_WindForm
         {
             FrmArticuloListado formArticulos = new FrmArticuloListado();
             formArticulos.ShowDialog();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void listadoDeMarcasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

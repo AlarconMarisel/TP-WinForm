@@ -9,20 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
 
-
 namespace TP_WindForm
 {
-    public partial class FrmArticuloListado : Form
+    public partial class FrmListaMarca : Form
     {
-        public FrmArticuloListado()
+        public FrmListaMarca()
         {
             InitializeComponent();
         }
-
-        private void FrmArticuloListado_Load(object sender, EventArgs e)
+        private void FrmListaMarca_Load_1(object sender, EventArgs e)
         {
-            AccesoDatos negocio = new AccesoDatos();
-            dataGridView1.DataSource = negocio.ListaMarca();
+            AccesoDatos datos = new AccesoDatos();
+            DgvListaDeMarcas.DataSource = datos.ListaMarca();
         }
     }
 }

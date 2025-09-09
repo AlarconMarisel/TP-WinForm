@@ -7,22 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Negocio;
-
 
 namespace TP_WindForm
 {
-    public partial class FrmArticuloListado : Form
+    public partial class Form1 : Form
     {
-        public FrmArticuloListado()
+        public Form1()
         {
             InitializeComponent();
-        }
-
-        private void FrmArticuloListado_Load(object sender, EventArgs e)
-        {
-            AccesoDatos negocio = new AccesoDatos();
-            dataGridView1.DataSource = negocio.ListaMarca();
         }
     }
 }
