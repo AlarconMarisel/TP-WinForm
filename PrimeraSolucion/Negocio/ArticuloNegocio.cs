@@ -14,6 +14,7 @@ namespace Negocio
 
             List<Articulo> listadoArticulos = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
+            
 
             try
             {
@@ -29,6 +30,7 @@ namespace Negocio
                     aux.DescripcionArticulo = (string)datos.Lector["Descripcion"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
                     listadoArticulos.Add(aux);
+             
                 }
 
 

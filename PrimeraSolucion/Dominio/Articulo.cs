@@ -12,8 +12,8 @@ namespace Dominio
         private string codigoArticulo;
         private string nombreArticulo;
         private string descripcionArticulo;
-        private Marca marca;
-        private Categoria categoria;
+        private Marca marcaArticulo;
+        private Categoria categoriaArticulo;
         private decimal precio;
         private List<Imagen> imagenes;
         
@@ -43,14 +43,14 @@ namespace Dominio
 
         public Marca Marca
         {
-            get { return marca; }
-            set { marca = value; }
+            get { return marcaArticulo; }
+            set { marcaArticulo = value; }
         }
 
         public Categoria Categoria
         {
-            get { return categoria; }
-            set { categoria = value; }
+            get { return categoriaArticulo; }
+            set { categoriaArticulo = value; }
         }
 
         public decimal Precio

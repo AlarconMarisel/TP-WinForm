@@ -26,8 +26,8 @@ namespace TP_WindForm
 
         private void listadoDeArticulosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmArticuloListado formArticulos = new FrmArticuloListado();
-            formArticulos.ShowDialog();
+            //FrmArticuloListado formArticulos = new FrmArticuloListado();
+            //formArticulos.ShowDialog();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -44,6 +44,13 @@ namespace TP_WindForm
 
         private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmArticuloListado formArticulos = new FrmArticuloListado();
+            formArticulos.ShowDialog();
 
         }
     }
