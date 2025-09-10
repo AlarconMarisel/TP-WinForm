@@ -53,6 +53,12 @@ namespace TP_WindForm
             formArticulos.ShowDialog();
 
         }
+
+        private void categoríasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmListaCategoria formCategoria = new FrmListaCategoria();
+            formCategoria.ShowDialog();
+        }
     }
 
 }
