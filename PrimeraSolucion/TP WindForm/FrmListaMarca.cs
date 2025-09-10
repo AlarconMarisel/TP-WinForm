@@ -19,13 +19,28 @@ namespace TP_WindForm
         }
         private void FrmListaMarca_Load_1(object sender, EventArgs e)
         {
-            MarcaNegocio datos = new MarcaNegocio();
-            DgvListaDeMarcas.DataSource = datos.ListaMarca();
+            cargar();
         }
+        private void cargar()
+        {
+            MarcaNegocio datos = new MarcaNegocio();
+            try
+            {
+                DgvListaDeMarcas.DataSource = datos.ListaMarca();
+                DgvListaDeMarcas.Columns["Id"].Visible = false;
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-
+            FrmAgregarMarca alta = new FrmAgregarMarca();
+            alta.ShowDialog();
+            cargar();
         }
 
         private void button2_Click(object sender, EventArgs e)

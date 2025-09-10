@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -13,29 +14,50 @@ namespace Negocio
 
         public List<Marca> ListaMarca()
         {
+
             List<Marca> lista = new List<Marca>();
+            AccesoDatos accesoDatos = new AccesoDatos();
 
-            SqlConnection conexion = new SqlConnection("Data Source=.\\SQLEXPRESS; Initial Catalog=CATALOGO_P3_DB; Integrated Security=true");
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexion;
-            comando.CommandText = "SELECT * FROM MARCAS";
-            SqlDataReader lector;
-            conexion.Open();
-            lector = comando.ExecuteReader();
 
-            while (lector.Read())
+            try
             {
-                Marca marca = new Marca();
-                marca.Id = (int)lector["Id"];
-                marca.Descripcion = (string)lector["Descripcion"];
-                lista.Add(marca);
+                accesoDatos.SetearConsulta("SELECT * FROM MARCAS");
+                accesoDatos.EjecutarLectura();
+
+
+                while (accesoDatos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.Id = (int)accesoDatos.Lector["Id"];
+                    aux.Descripcion = (string)accesoDatos.Lector["Descripcion"];
+                    lista.Add(aux);
+                }
+                return lista;
+
             }
-            conexion.Close();
+            catch (Exception)
+            {
 
-            return lista;
-
+                throw;
+            }
 
         }
-
+        public void agregar(Marca nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("INSERT INTO MARCAS (Descripcion) VALUES ('" + nuevo.Descripcion + "')");
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+              throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion(); 
+            }
+        }
     }
 }

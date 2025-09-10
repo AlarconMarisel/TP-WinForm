@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAgregarMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAgregarMarca.Designer.cs">
+      <DependentUpon>FrmAgregarMarca.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmListaCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmAgregarMarca.resx">
+      <DependentUpon>FrmAgregarMarca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmListaCategoria.resx">
       <DependentUpon>FrmListaCategoria.cs</DependentUpon>
     </EmbeddedResource>
