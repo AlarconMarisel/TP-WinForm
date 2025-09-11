@@ -34,19 +34,14 @@ namespace TP_WindForm
         {
 
         }
-
-        private void listadoDeMarcasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmListaMarca formMarca = new FrmListaMarca();
-            formMarca.ShowDialog();
-
-        }
-
         private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmListaMarca formMarca = new FrmListaMarca();
+           {
+                formMarca.ShowDialog();
+            }
+          
         }
-
         private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmArticuloListado formArticulos = new FrmArticuloListado();

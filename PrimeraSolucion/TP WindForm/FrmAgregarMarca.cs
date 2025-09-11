@@ -14,9 +14,16 @@ namespace TP_WindForm
 {
     public partial class FrmAgregarMarca : Form
     {
+        private Marca marca = null;
         public FrmAgregarMarca()
         {
             InitializeComponent();
+        }
+        public FrmAgregarMarca(Marca marca)
+        {
+            InitializeComponent();
+            this.marca = marca;
+            txtNombreMarca.Text = marca.Descripcion;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -26,19 +33,29 @@ namespace TP_WindForm
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Marca nuevo = new Marca();
             MarcaNegocio negocio = new MarcaNegocio();
+
             try
             {
-                nuevo.Descripcion = texNombreMarca.Text;
-                negocio.agregar(nuevo);
-                MessageBox.Show("Agregado Exitosamente");
+                if (marca == null) // Alta
+                {
+                    Marca nuevo = new Marca();
+                    nuevo.Descripcion = txtNombreMarca.Text;
+                    negocio.agregar(nuevo);
+                    MessageBox.Show("Agregado exitosamente");
+                }
+                else // Edición
+                {
+                    marca.Descripcion = txtNombreMarca.Text;
+                    negocio.modificar(marca);                
+                    MessageBox.Show("Modificado exitosamente");
+                }
+
                 Close();
             }
             catch (Exception ex)
             {
-
-               MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
         }
     }

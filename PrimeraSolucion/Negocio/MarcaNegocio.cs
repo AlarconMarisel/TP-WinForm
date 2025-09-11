@@ -52,11 +52,31 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-              throw ex;
+                throw ex;
             }
             finally
             {
-                datos.cerrarConexion(); 
+                datos.cerrarConexion();
+            }
+        }
+        public void modificar(Marca marca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("UPDATE MARCAS SET Descripcion = @Descripcion WHERE Id = @Id");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@Descripcion", marca.Descripcion);
+                datos.Comando.Parameters.AddWithValue("@Id", marca.Id);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

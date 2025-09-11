@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dominio;
 using Negocio;
 
 namespace TP_WindForm
@@ -28,12 +29,10 @@ namespace TP_WindForm
             {
                 DgvListaDeMarcas.DataSource = datos.ListaMarca();
                 DgvListaDeMarcas.Columns["Id"].Visible = false;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -45,6 +44,12 @@ namespace TP_WindForm
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Marca seleccionado;
+            seleccionado = (Marca)DgvListaDeMarcas.CurrentRow.DataBoundItem;
+
+            FrmAgregarMarca modificar = new FrmAgregarMarca(seleccionado);
+            modificar.ShowDialog();
+            cargar();
 
         }
     }

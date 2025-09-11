@@ -32,5 +32,15 @@ namespace TP_WindForm
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void BtnAgregarCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnModificarCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

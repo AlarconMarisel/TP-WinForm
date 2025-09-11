@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lblAgregar = new System.Windows.Forms.Label();
-            this.texNombreMarca = new System.Windows.Forms.TextBox();
+            this.txtNombreMarca = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -43,12 +43,12 @@
             this.lblAgregar.TabIndex = 0;
             this.lblAgregar.Text = "Nombre";
             // 
-            // texNombreMarca
+            // txtNombreMarca
             // 
-            this.texNombreMarca.Location = new System.Drawing.Point(130, 60);
-            this.texNombreMarca.Name = "texNombreMarca";
-            this.texNombreMarca.Size = new System.Drawing.Size(155, 22);
-            this.texNombreMarca.TabIndex = 1;
+            this.txtNombreMarca.Location = new System.Drawing.Point(130, 60);
+            this.txtNombreMarca.Name = "txtNombreMarca";
+            this.txtNombreMarca.Size = new System.Drawing.Size(155, 22);
+            this.txtNombreMarca.TabIndex = 1;
             // 
             // btnAceptar
             // 
@@ -77,7 +77,7 @@
             this.ClientSize = new System.Drawing.Size(353, 231);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.texNombreMarca);
+            this.Controls.Add(this.txtNombreMarca);
             this.Controls.Add(this.lblAgregar);
             this.Name = "FrmAgregarMarca";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -90,7 +90,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblAgregar;
-        private System.Windows.Forms.TextBox texNombreMarca;
+        private System.Windows.Forms.TextBox txtNombreMarca;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
     }

@@ -30,13 +30,14 @@
         {
             this.DgvListaDeMarcas = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnModificarMarca = new System.Windows.Forms.Button();
             this.Eliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaDeMarcas)).BeginInit();
             this.SuspendLayout();
             // 
             // DgvListaDeMarcas
             // 
+            this.DgvListaDeMarcas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvListaDeMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvListaDeMarcas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.DgvListaDeMarcas.Location = new System.Drawing.Point(40, 61);
@@ -58,15 +59,15 @@
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnModificar
+            // btnModificarMarca
             // 
-            this.btnModificar.Location = new System.Drawing.Point(275, 284);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(109, 40);
-            this.btnModificar.TabIndex = 2;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.button2_Click);
+            this.btnModificarMarca.Location = new System.Drawing.Point(275, 284);
+            this.btnModificarMarca.Name = "btnModificarMarca";
+            this.btnModificarMarca.Size = new System.Drawing.Size(109, 40);
+            this.btnModificarMarca.TabIndex = 2;
+            this.btnModificarMarca.Text = "Modificar";
+            this.btnModificarMarca.UseVisualStyleBackColor = true;
+            this.btnModificarMarca.Click += new System.EventHandler(this.button2_Click);
             // 
             // Eliminar
             // 
@@ -81,9 +82,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 350);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(545, 280);
             this.Controls.Add(this.Eliminar);
-            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnModificarMarca);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.DgvListaDeMarcas);
             this.Name = "FrmListaMarca";
@@ -98,7 +101,7 @@
 
         private System.Windows.Forms.DataGridView DgvListaDeMarcas;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnModificarMarca;
         private System.Windows.Forms.Button Eliminar;
     }
 }
