@@ -59,6 +59,12 @@ namespace TP_WindForm
             FrmListaCategoria formCategoria = new FrmListaCategoria();
             formCategoria.ShowDialog();
         }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Saliendo del sistema");
+            Close();
+        }
     }
 
 }

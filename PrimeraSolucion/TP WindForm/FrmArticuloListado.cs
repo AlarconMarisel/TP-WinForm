@@ -25,12 +25,21 @@ namespace TP_WindForm
             try
             {
                 dgvArticulos.DataSource = negocio.listarArticulo();
+                dgvArticulos.Columns["IdArticulo"].Visible = false;
+                dgvArticulos.Columns["DescripcionArticulo"].Visible = false;
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void btnAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            FrmAgregarArticulo agregar = new FrmAgregarArticulo();
+            agregar.ShowDialog();
         }
     }
 }
