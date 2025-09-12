@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,12 +36,39 @@ namespace TP_WindForm
 
         private void BtnAgregarCategoria_Click(object sender, EventArgs e)
         {
-
+            FrmAgregarCategoria agregar = new FrmAgregarCategoria();
+            agregar.ShowDialog();
+            FrmListaCategoria_Load(sender, e);
         }
 
         private void BtnModificarCategoria_Click(object sender, EventArgs e)
         {
+            if (DgvCategorias.CurrentRow != null)
+            {
+                Categoria seleccionada = (Categoria)DgvCategorias.CurrentRow.DataBoundItem;
+                FrmAgregarCategoria modificar = new FrmAgregarCategoria(seleccionada);
+                modificar.ShowDialog();
+                FrmListaCategoria_Load(sender, e);
+            }
+        }
 
+        private void BtnEliminarCategoria_Click(object sender, EventArgs e)
+        {
+            if (DgvCategorias.CurrentRow != null)
+            {
+                Categoria seleccionada = (Categoria)DgvCategorias.CurrentRow.DataBoundItem;
+                CategoriaNegocio negocio = new CategoriaNegocio();
+                try
+                {
+                    negocio.eliminar(seleccionada.Id);
+                    MessageBox.Show("Eliminado exitosamente");
+                    FrmListaCategoria_Load(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
     }
 }
