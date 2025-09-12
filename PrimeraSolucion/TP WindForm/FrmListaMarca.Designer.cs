@@ -46,12 +46,12 @@
             this.DgvListaDeMarcas.RowHeadersWidth = 51;
             this.DgvListaDeMarcas.RowTemplate.Height = 24;
             this.DgvListaDeMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvListaDeMarcas.Size = new System.Drawing.Size(591, 187);
+            this.DgvListaDeMarcas.Size = new System.Drawing.Size(391, 184);
             this.DgvListaDeMarcas.TabIndex = 0;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(96, 284);
+            this.btnAgregar.Location = new System.Drawing.Point(40, 263);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(115, 40);
             this.btnAgregar.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // btnModificarMarca
             // 
-            this.btnModificarMarca.Location = new System.Drawing.Point(275, 284);
+            this.btnModificarMarca.Location = new System.Drawing.Point(180, 263);
             this.btnModificarMarca.Name = "btnModificarMarca";
             this.btnModificarMarca.Size = new System.Drawing.Size(109, 40);
             this.btnModificarMarca.TabIndex = 2;
@@ -71,12 +71,13 @@
             // 
             // Eliminar
             // 
-            this.Eliminar.Location = new System.Drawing.Point(458, 284);
+            this.Eliminar.Location = new System.Drawing.Point(322, 263);
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.Size = new System.Drawing.Size(109, 40);
             this.Eliminar.TabIndex = 3;
             this.Eliminar.Text = "Eliminar";
             this.Eliminar.UseVisualStyleBackColor = true;
+            this.Eliminar.Click += new System.EventHandler(this.Eliminar_Click);
             // 
             // FrmListaMarca
             // 
@@ -84,7 +85,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(545, 280);
+            this.ClientSize = new System.Drawing.Size(477, 365);
             this.Controls.Add(this.Eliminar);
             this.Controls.Add(this.btnModificarMarca);
             this.Controls.Add(this.btnAgregar);

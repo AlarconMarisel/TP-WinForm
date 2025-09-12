@@ -52,5 +52,30 @@ namespace TP_WindForm
             cargar();
 
         }
+            private void Eliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+                Marca seleccionado = (Marca)DgvListaDeMarcas.CurrentRow.DataBoundItem;
+
+                var confirm = MessageBox.Show("¿Está seguro de eliminar esta marca?",
+                                              "Confirmar eliminación",
+                                              MessageBoxButtons.YesNo,
+                                              MessageBoxIcon.Warning);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    MarcaNegocio negocio = new MarcaNegocio();
+                    negocio.eliminar(seleccionado);
+                    MessageBox.Show("Marca eliminada correctamente.");
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

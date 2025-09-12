@@ -37,14 +37,14 @@ namespace TP_WindForm
 
             try
             {
-                if (marca == null) // Alta
+                if (marca == null) 
                 {
                     Marca nuevo = new Marca();
                     nuevo.Descripcion = txtNombreMarca.Text;
                     negocio.agregar(nuevo);
                     MessageBox.Show("Agregado exitosamente");
                 }
-                else // Edición
+                else 
                 {
                     marca.Descripcion = txtNombreMarca.Text;
                     negocio.modificar(marca);                
