@@ -18,12 +18,14 @@ namespace TP_WindForm
         public FrmAgregarCategoria()
         {
             InitializeComponent();
+            this.Text = "Agregar Categoría";
         }
         public FrmAgregarCategoria(Categoria categoria)
         {
             InitializeComponent();
             this.categoria = categoria;
             txtNombreCategoria.Text = categoria.Descripcion;
+            this.Text = "Modificar Categoría";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -33,6 +35,14 @@ namespace TP_WindForm
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            
+            if (string.IsNullOrWhiteSpace(txtNombreCategoria.Text))
+            {
+                MessageBox.Show("Por favor ingrese un nombre para la categoría.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNombreCategoria.Focus();
+                return;
+            }
+
             CategoriaNegocio negocio = new CategoriaNegocio();
 
             try
@@ -40,22 +50,29 @@ namespace TP_WindForm
                 if (categoria == null) // Alta
                 {
                     Categoria nuevo = new Categoria();
-                    nuevo.Descripcion = txtNombreCategoria.Text;
+                    nuevo.Descripcion = txtNombreCategoria.Text.Trim();
                     negocio.agregar(nuevo);
-                    MessageBox.Show("Agregado exitosamente");
+                    MessageBox.Show("Categoría agregada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else // Edición
                 {
-                    categoria.Descripcion = txtNombreCategoria.Text;
+                    
+                    if (categoria.Descripcion == txtNombreCategoria.Text.Trim())
+                    {
+                        MessageBox.Show("No se realizaron cambios en la categoría.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    categoria.Descripcion = txtNombreCategoria.Text.Trim();
                     negocio.modificar(categoria);                
-                    MessageBox.Show("Modificado exitosamente");
+                    MessageBox.Show("Categoría modificada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

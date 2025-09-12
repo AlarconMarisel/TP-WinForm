@@ -38,6 +38,12 @@ namespace Negocio
 
         public void agregar(Categoria nuevo)
         {
+            
+            if (existeCategoria(nuevo.Descripcion))
+            {
+                throw new Exception($"Ya existe una categoría con el nombre '{nuevo.Descripcion}'. No se permiten duplicados.");
+            }
+
             AccesoDatos datos = new AccesoDatos();
             try
             {
@@ -57,6 +63,21 @@ namespace Negocio
 
         public void modificar(Categoria categoria)
         {
+            
+            Categoria categoriaOriginal = obtenerCategoriaPorId(categoria.Id);
+            
+           
+            if (categoriaOriginal != null && categoriaOriginal.Descripcion == categoria.Descripcion)
+            {
+                throw new Exception("No se realizaron cambios en la categoría.");
+            }
+
+            
+            if (existeCategoriaExacta(categoria.Descripcion, categoria.Id))
+            {
+                throw new Exception($"La categoría no se puede modificar porque ya existe una categoría con el nombre '{categoria.Descripcion}'.");
+            }
+
             AccesoDatos datos = new AccesoDatos();
             try
             {
@@ -83,6 +104,88 @@ namespace Negocio
                 datos.SetearConsulta("delete from CATEGORIAS where Id = @id");
                 datos.Comando.Parameters.AddWithValue("@id", id);
                 datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        
+        private bool existeCategoria(string descripcion)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("select count(*) from CATEGORIAS where UPPER(Descripcion) = UPPER(@descripcion)");
+                datos.Comando.Parameters.AddWithValue("@descripcion", descripcion);
+                datos.EjecutarLectura();
+                
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector[0] > 0;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        
+        private bool existeCategoriaExacta(string descripcion, int idExcluir)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("select count(*) from CATEGORIAS where Descripcion = @descripcion and Id != @id");
+                datos.Comando.Parameters.AddWithValue("@descripcion", descripcion);
+                datos.Comando.Parameters.AddWithValue("@id", idExcluir);
+                datos.EjecutarLectura();
+                
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector[0] > 0;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        
+        private Categoria obtenerCategoriaPorId(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("select * from CATEGORIAS where Id = @id");
+                datos.Comando.Parameters.AddWithValue("@id", id);
+                datos.EjecutarLectura();
+                
+                if (datos.Lector.Read())
+                {
+                    Categoria categoria = new Categoria();
+                    categoria.Id = (int)datos.Lector["Id"];
+                    categoria.Descripcion = (string)datos.Lector["Descripcion"];
+                    return categoria;
+                }
+                return null;
             }
             catch (Exception ex)
             {
