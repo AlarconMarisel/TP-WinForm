@@ -77,6 +77,7 @@
             this.BtnEliminarCategoria.TabIndex = 3;
             this.BtnEliminarCategoria.Text = "Eliminar";
             this.BtnEliminarCategoria.UseVisualStyleBackColor = true;
+            this.BtnEliminarCategoria.Click += new System.EventHandler(this.BtnEliminarCategoria_Click);
             // 
             // FrmListaCategoria
             // 
