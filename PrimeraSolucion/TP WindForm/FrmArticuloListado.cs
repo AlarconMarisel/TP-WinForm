@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dominio;
 using Negocio;
 
 namespace TP_WindForm
@@ -40,6 +41,14 @@ namespace TP_WindForm
         {
             FrmAgregarArticulo agregar = new FrmAgregarArticulo();
             agregar.ShowDialog();
+        }
+
+        private void btnModificarArticulo_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            FrmAgregarArticulo modificar = new FrmAgregarArticulo(seleccionado);
+            modificar.ShowDialog(); 
         }
     }
 }
