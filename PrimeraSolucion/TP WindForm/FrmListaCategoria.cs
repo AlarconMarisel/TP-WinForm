@@ -15,17 +15,45 @@ namespace TP_WindForm
 {
     public partial class FrmListaCategoria : Form
     {
+        private DataTable dataTable;
+        private BindingSource bindingSource;
+        private bool ordenDescendente = false;
+
         public FrmListaCategoria()
         {
             InitializeComponent();
+            configurarDataTable();
         }
 
-        private void FrmListaCategoria_Load(object sender, EventArgs e)
+        private void configurarDataTable()
+        {            
+            dataTable = new DataTable();
+            dataTable.Columns.Add("Id", typeof(int));
+            dataTable.Columns.Add("Descripcion", typeof(string));
+          
+            bindingSource = new BindingSource();
+            bindingSource.DataSource = dataTable;
+            DgvCategorias.DataSource = bindingSource;
+        }
+
+        private void cargar()
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
             try
             {
-                DgvCategorias.DataSource = negocio.listarCategoria();
+                List<Categoria> listaCategorias = negocio.listarCategoria();
+                               
+                dataTable.Clear();
+                              
+                foreach (Categoria categoria in listaCategorias)
+                {
+                    dataTable.Rows.Add(categoria.Id, categoria.Descripcion);
+                }
+                               
+                dataTable.DefaultView.Sort = "Descripcion ASC";
+                DgvCategorias.Columns["Descripcion"].HeaderText = "Categoría ↑";
+                ordenDescendente = false;
+                               
                 DgvCategorias.Columns["Id"].Visible = false;
             }
             catch (Exception ex)
@@ -34,21 +62,30 @@ namespace TP_WindForm
             }
         }
 
+        private void FrmListaCategoria_Load(object sender, EventArgs e)
+        {
+            cargar();
+        }
+
         private void BtnAgregarCategoria_Click(object sender, EventArgs e)
         {
             FrmAgregarCategoria agregar = new FrmAgregarCategoria();
             agregar.ShowDialog();
-            FrmListaCategoria_Load(sender, e);
+            cargar();
         }
 
         private void BtnModificarCategoria_Click(object sender, EventArgs e)
         {
             if (DgvCategorias.CurrentRow != null)
             {
-                Categoria seleccionada = (Categoria)DgvCategorias.CurrentRow.DataBoundItem;
+                DataRowView rowView = (DataRowView)DgvCategorias.CurrentRow.DataBoundItem;
+                Categoria seleccionada = new Categoria();
+                seleccionada.Id = (int)rowView["Id"];
+                seleccionada.Descripcion = (string)rowView["Descripcion"];
+                
                 FrmAgregarCategoria modificar = new FrmAgregarCategoria(seleccionada);
                 modificar.ShowDialog();
-                FrmListaCategoria_Load(sender, e);
+                cargar();
             }
         }
 
@@ -56,18 +93,55 @@ namespace TP_WindForm
         {
             if (DgvCategorias.CurrentRow != null)
             {
-                Categoria seleccionada = (Categoria)DgvCategorias.CurrentRow.DataBoundItem;
+                DataRowView rowView = (DataRowView)DgvCategorias.CurrentRow.DataBoundItem;
+                int idCategoria = (int)rowView["Id"];
+                
                 CategoriaNegocio negocio = new CategoriaNegocio();
                 try
                 {
-                    negocio.eliminar(seleccionada.Id);
+                    negocio.eliminar(idCategoria);
                     MessageBox.Show("Eliminado exitosamente");
-                    FrmListaCategoria_Load(sender, e);
+                    cargar();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
                 }
+            }
+        }
+
+        private void DgvCategorias_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == DgvCategorias.Columns["Descripcion"].Index)
+            {
+                ordenDescendente = !ordenDescendente;
+                
+                if (ordenDescendente)
+                {
+                    dataTable.DefaultView.Sort = "Descripcion DESC";
+                    DgvCategorias.Columns["Descripcion"].HeaderText = "Categoría ↓";
+                }
+                else
+                {
+                    dataTable.DefaultView.Sort = "Descripcion ASC";
+                    DgvCategorias.Columns["Descripcion"].HeaderText = "Categoría ↑";
+                }
+            }
+        }
+
+        private void DgvCategorias_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == DgvCategorias.Columns["Descripcion"].Index && e.RowIndex == -1)
+            {
+                DgvCategorias.Cursor = Cursors.Hand;
+            }
+        }
+
+        private void DgvCategorias_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == DgvCategorias.Columns["Descripcion"].Index && e.RowIndex == -1)
+            {
+                DgvCategorias.Cursor = Cursors.Default;
             }
         }
     }

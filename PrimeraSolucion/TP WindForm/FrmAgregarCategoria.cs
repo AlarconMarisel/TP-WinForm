@@ -47,14 +47,14 @@ namespace TP_WindForm
 
             try
             {
-                if (categoria == null) // Alta
+                if (categoria == null)
                 {
                     Categoria nuevo = new Categoria();
                     nuevo.Descripcion = txtNombreCategoria.Text.Trim();
                     negocio.agregar(nuevo);
                     MessageBox.Show("Categoría agregada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else // Edición
+                else
                 {
                     
                     if (categoria.Descripcion == txtNombreCategoria.Text.Trim())

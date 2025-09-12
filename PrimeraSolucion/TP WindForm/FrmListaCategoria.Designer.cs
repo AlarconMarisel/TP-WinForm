@@ -45,6 +45,9 @@
             this.DgvCategorias.RowTemplate.Height = 33;
             this.DgvCategorias.Size = new System.Drawing.Size(403, 208);
             this.DgvCategorias.TabIndex = 0;
+            this.DgvCategorias.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvCategorias_ColumnHeaderMouseClick);
+            this.DgvCategorias.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCategorias_CellMouseEnter);
+            this.DgvCategorias.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCategorias_CellMouseLeave);
             // 
             // BtnAgregarCategoria
             // 
