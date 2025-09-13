@@ -18,6 +18,8 @@ namespace TP_WindForm
         {
             InitializeComponent();
         }
+        private List<Marca> listaMarcas;
+
         private void FrmListaMarca_Load_1(object sender, EventArgs e)
         {
             cargar();
@@ -27,14 +29,22 @@ namespace TP_WindForm
             MarcaNegocio datos = new MarcaNegocio();
             try
             {
-                DgvListaDeMarcas.DataSource = datos.ListaMarca();
-                DgvListaDeMarcas.Columns["Id"].Visible = false;
+                listaMarcas = datos.ListaMarca();
+                ocultarColumnas();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void ocultarColumnas()
+        {
+            DgvListaDeMarcas.DataSource = listaMarcas;
+            DgvListaDeMarcas.Columns["Id"].Visible = false;
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FrmAgregarMarca alta = new FrmAgregarMarca();
@@ -52,11 +62,11 @@ namespace TP_WindForm
             cargar();
 
         }
-            private void Eliminar_Click(object sender, EventArgs e)
+        private void Eliminar_Click(object sender, EventArgs e)
         {
             try
             {
-               
+
                 Marca seleccionado = (Marca)DgvListaDeMarcas.CurrentRow.DataBoundItem;
 
                 var confirm = MessageBox.Show("¿Está seguro de eliminar esta marca?",
@@ -76,6 +86,31 @@ namespace TP_WindForm
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnBuscarMarca_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Marca> listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro.Length >= 3)
+            {
+                listaFiltrada = listaMarcas.FindAll(x => x.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaMarcas;
+            }
+
+            DgvListaDeMarcas.DataSource = null;
+            DgvListaDeMarcas.DataSource = listaFiltrada;
+            DgvListaDeMarcas.Columns["Id"].Visible = false;
+
+
         }
     }
 }

@@ -32,6 +32,8 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificarMarca = new System.Windows.Forms.Button();
             this.Eliminar = new System.Windows.Forms.Button();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.lblFiltroMarca = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaDeMarcas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,18 +42,18 @@
             this.DgvListaDeMarcas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvListaDeMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvListaDeMarcas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.DgvListaDeMarcas.Location = new System.Drawing.Point(40, 61);
+            this.DgvListaDeMarcas.Location = new System.Drawing.Point(37, 86);
             this.DgvListaDeMarcas.MultiSelect = false;
             this.DgvListaDeMarcas.Name = "DgvListaDeMarcas";
             this.DgvListaDeMarcas.RowHeadersWidth = 51;
             this.DgvListaDeMarcas.RowTemplate.Height = 24;
             this.DgvListaDeMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvListaDeMarcas.Size = new System.Drawing.Size(391, 184);
+            this.DgvListaDeMarcas.Size = new System.Drawing.Size(435, 184);
             this.DgvListaDeMarcas.TabIndex = 0;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(40, 263);
+            this.btnAgregar.Location = new System.Drawing.Point(37, 288);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(115, 40);
             this.btnAgregar.TabIndex = 1;
@@ -61,7 +63,7 @@
             // 
             // btnModificarMarca
             // 
-            this.btnModificarMarca.Location = new System.Drawing.Point(180, 263);
+            this.btnModificarMarca.Location = new System.Drawing.Point(177, 288);
             this.btnModificarMarca.Name = "btnModificarMarca";
             this.btnModificarMarca.Size = new System.Drawing.Size(109, 40);
             this.btnModificarMarca.TabIndex = 2;
@@ -71,7 +73,7 @@
             // 
             // Eliminar
             // 
-            this.Eliminar.Location = new System.Drawing.Point(322, 263);
+            this.Eliminar.Location = new System.Drawing.Point(319, 288);
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.Size = new System.Drawing.Size(109, 40);
             this.Eliminar.TabIndex = 3;
@@ -79,13 +81,32 @@
             this.Eliminar.UseVisualStyleBackColor = true;
             this.Eliminar.Click += new System.EventHandler(this.Eliminar_Click);
             // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(170, 26);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(302, 22);
+            this.txtFiltro.TabIndex = 4;
+            this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
+            // 
+            // lblFiltroMarca
+            // 
+            this.lblFiltroMarca.AutoSize = true;
+            this.lblFiltroMarca.Location = new System.Drawing.Point(34, 26);
+            this.lblFiltroMarca.Name = "lblFiltroMarca";
+            this.lblFiltroMarca.Size = new System.Drawing.Size(84, 16);
+            this.lblFiltroMarca.TabIndex = 5;
+            this.lblFiltroMarca.Text = "Filtro Rapido";
+            // 
             // FrmListaMarca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(477, 365);
+            this.ClientSize = new System.Drawing.Size(582, 372);
+            this.Controls.Add(this.lblFiltroMarca);
+            this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.Eliminar);
             this.Controls.Add(this.btnModificarMarca);
             this.Controls.Add(this.btnAgregar);
@@ -95,6 +116,7 @@
             this.Load += new System.EventHandler(this.FrmListaMarca_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaDeMarcas)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -104,5 +126,7 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificarMarca;
         private System.Windows.Forms.Button Eliminar;
+        private System.Windows.Forms.TextBox txtFiltro;
+        private System.Windows.Forms.Label lblFiltroMarca;
     }
 }
