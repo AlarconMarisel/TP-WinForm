@@ -19,6 +19,7 @@ namespace TP_WindForm
         {
             InitializeComponent();
             this.Text = "Agregar Categoría";
+            btnAceptar.Text = "Agregar";
         }
         public FrmAgregarCategoria(Categoria categoria)
         {
@@ -26,6 +27,7 @@ namespace TP_WindForm
             this.categoria = categoria;
             txtNombreCategoria.Text = categoria.Descripcion;
             this.Text = "Modificar Categoría";
+            btnAceptar.Text = "Modificar";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -35,10 +37,11 @@ namespace TP_WindForm
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            string nuevoNombre = txtNombreCategoria.Text.Trim();
             
-            if (string.IsNullOrWhiteSpace(txtNombreCategoria.Text))
+            if (string.IsNullOrWhiteSpace(nuevoNombre))
             {
-                MessageBox.Show("Por favor ingrese un nombre para la categoría.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe ingresar un nombre para la categoría.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNombreCategoria.Focus();
                 return;
             }
@@ -50,20 +53,19 @@ namespace TP_WindForm
                 if (categoria == null)
                 {
                     Categoria nuevo = new Categoria();
-                    nuevo.Descripcion = txtNombreCategoria.Text.Trim();
+                    nuevo.Descripcion = nuevoNombre;
                     negocio.agregar(nuevo);
                     MessageBox.Show("Categoría agregada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    
-                    if (categoria.Descripcion == txtNombreCategoria.Text.Trim())
+                    if (categoria.Descripcion == nuevoNombre)
                     {
                         MessageBox.Show("No se realizaron cambios en la categoría.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
 
-                    categoria.Descripcion = txtNombreCategoria.Text.Trim();
+                    categoria.Descripcion = nuevoNombre;
                     negocio.modificar(categoria);                
                     MessageBox.Show("Categoría modificada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
