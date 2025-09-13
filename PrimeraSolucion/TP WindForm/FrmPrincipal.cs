@@ -57,8 +57,11 @@ namespace TP_WindForm
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Saliendo del sistema");
-            Close();
+            DialogResult resultado = MessageBox.Show("Saliendo del Sistema, ¿Esta seguro que desea Salir?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (resultado == DialogResult.Yes)
+            {
+                Close();
+            }
         }
     }
 
