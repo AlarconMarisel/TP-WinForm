@@ -95,17 +95,26 @@ namespace TP_WindForm
             {
                 DataRowView rowView = (DataRowView)DgvCategorias.CurrentRow.DataBoundItem;
                 int idCategoria = (int)rowView["Id"];
+                string nombreCategoria = (string)rowView["Descripcion"];
                 
                 CategoriaNegocio negocio = new CategoriaNegocio();
                 try
                 {
-                    negocio.eliminar(idCategoria);
-                    MessageBox.Show("Eliminado exitosamente");
-                    cargar();
+                    DialogResult respuesta = MessageBox.Show($"¿Está seguro que desea eliminar la categoría '{nombreCategoria}'?", 
+                                                           "Eliminar Categoría", 
+                                                           MessageBoxButtons.YesNo, 
+                                                           MessageBoxIcon.Warning);
+                    
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        negocio.eliminar(idCategoria);
+                        MessageBox.Show("Categoría eliminada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cargar();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Error al eliminar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -37,24 +37,23 @@
             // 
             // DgvCategorias
             // 
+            this.DgvCategorias.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvCategorias.Location = new System.Drawing.Point(76, 105);
-            this.DgvCategorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DgvCategorias.Location = new System.Drawing.Point(72, 144);
             this.DgvCategorias.Name = "DgvCategorias";
             this.DgvCategorias.RowHeadersWidth = 82;
             this.DgvCategorias.RowTemplate.Height = 33;
-            this.DgvCategorias.Size = new System.Drawing.Size(403, 208);
+            this.DgvCategorias.Size = new System.Drawing.Size(618, 510);
             this.DgvCategorias.TabIndex = 0;
-            this.DgvCategorias.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvCategorias_ColumnHeaderMouseClick);
             this.DgvCategorias.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCategorias_CellMouseEnter);
             this.DgvCategorias.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCategorias_CellMouseLeave);
+            this.DgvCategorias.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvCategorias_ColumnHeaderMouseClick);
             // 
             // BtnAgregarCategoria
             // 
-            this.BtnAgregarCategoria.Location = new System.Drawing.Point(76, 333);
-            this.BtnAgregarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnAgregarCategoria.Location = new System.Drawing.Point(73, 699);
             this.BtnAgregarCategoria.Name = "BtnAgregarCategoria";
-            this.BtnAgregarCategoria.Size = new System.Drawing.Size(113, 46);
+            this.BtnAgregarCategoria.Size = new System.Drawing.Size(172, 72);
             this.BtnAgregarCategoria.TabIndex = 1;
             this.BtnAgregarCategoria.Text = "Agregar";
             this.BtnAgregarCategoria.UseVisualStyleBackColor = true;
@@ -62,10 +61,9 @@
             // 
             // BtnModificarCategoria
             // 
-            this.BtnModificarCategoria.Location = new System.Drawing.Point(221, 333);
-            this.BtnModificarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnModificarCategoria.Location = new System.Drawing.Point(291, 699);
             this.BtnModificarCategoria.Name = "BtnModificarCategoria";
-            this.BtnModificarCategoria.Size = new System.Drawing.Size(113, 46);
+            this.BtnModificarCategoria.Size = new System.Drawing.Size(170, 72);
             this.BtnModificarCategoria.TabIndex = 2;
             this.BtnModificarCategoria.Text = "Modificar";
             this.BtnModificarCategoria.UseVisualStyleBackColor = true;
@@ -73,10 +71,9 @@
             // 
             // BtnEliminarCategoria
             // 
-            this.BtnEliminarCategoria.Location = new System.Drawing.Point(375, 333);
-            this.BtnEliminarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnEliminarCategoria.Location = new System.Drawing.Point(521, 699);
             this.BtnEliminarCategoria.Name = "BtnEliminarCategoria";
-            this.BtnEliminarCategoria.Size = new System.Drawing.Size(113, 46);
+            this.BtnEliminarCategoria.Size = new System.Drawing.Size(170, 72);
             this.BtnEliminarCategoria.TabIndex = 3;
             this.BtnEliminarCategoria.Text = "Eliminar";
             this.BtnEliminarCategoria.UseVisualStyleBackColor = true;
@@ -84,14 +81,13 @@
             // 
             // FrmListaCategoria
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 422);
+            this.ClientSize = new System.Drawing.Size(768, 831);
             this.Controls.Add(this.BtnEliminarCategoria);
             this.Controls.Add(this.BtnModificarCategoria);
             this.Controls.Add(this.BtnAgregarCategoria);
             this.Controls.Add(this.DgvCategorias);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmListaCategoria";
             this.Text = "FrmListaCategoria";
             this.Load += new System.EventHandler(this.FrmListaCategoria_Load);

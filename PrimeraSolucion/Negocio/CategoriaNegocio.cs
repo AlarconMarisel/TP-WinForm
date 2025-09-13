@@ -100,9 +100,31 @@ namespace Negocio
         {
             AccesoDatos datos = new AccesoDatos();
             try
-            {
-                datos.SetearConsulta("delete from CATEGORIAS where Id = @id");
-                datos.Comando.Parameters.AddWithValue("@id", id);
+            {             
+                datos.SetearConsulta("SELECT COUNT(*) FROM ARTICULOS WHERE IdCategoria = @Id");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@Id", id);
+                datos.EjecutarLectura();
+                
+                if (datos.Lector.Read())
+                {
+                    int cantidadArticulos = (int)datos.Lector[0];
+                    datos.cerrarConexion();
+                    
+                    if (cantidadArticulos > 0)
+                    {
+                        throw new Exception("No se puede eliminar la categoría porque existen " + 
+                                          cantidadArticulos + " artículo(s) de la misma.");
+                    }
+                }
+                else
+                {
+                    datos.cerrarConexion();
+                }
+                
+                datos.SetearConsulta("DELETE FROM CATEGORIAS WHERE Id = @Id");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@Id", id);
                 datos.EjecutarAccion();
             }
             catch (Exception ex)
