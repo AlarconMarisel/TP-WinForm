@@ -77,6 +77,7 @@ namespace TP_WindForm
 
             try
             {
+                btnEliminarImagen.Visible = false;
                 cboMarcaArticulo.DataSource = marcaNegocio.ListaMarca();
                 cboMarcaArticulo.ValueMember = "Id";
                 cboMarcaArticulo.DisplayMember = "Descripcion";
@@ -87,6 +88,7 @@ namespace TP_WindForm
                 if (articulo != null)  
                 {
                     Text = "Modificar Artículo";
+                    btnEliminarImagen.Visible = true;
                     txtCodigoArticulo.Text = articulo.CodigoArticulo;
                     txtNombreArticulo.Text = articulo.NombreArticulo;
                     txtDescripcionArticulo.Text = articulo.DescripcionArticulo;
@@ -100,6 +102,12 @@ namespace TP_WindForm
             {
                 MessageBox.Show(ex.ToString());
             }   
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            FrmAgregarImagen agregarImagen = new FrmAgregarImagen();
+            agregarImagen.ShowDialog();
         }
     }
 }

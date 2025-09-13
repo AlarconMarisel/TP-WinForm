@@ -62,12 +62,12 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
-                datos.setearParametro("@Codigo", articuloNuevo.CodigoArticulo);
-                datos.setearParametro("@Nombre", articuloNuevo.NombreArticulo);
-                datos.setearParametro("@Descripcion", articuloNuevo.DescripcionArticulo);
-                datos.setearParametro("@IdMarca", articuloNuevo.MarcaArticulo.Id);
-                datos.setearParametro("@IdCategoria", articuloNuevo.CategoriaArticulo.Id);
-                datos.setearParametro("@Precio", articuloNuevo.Precio);
+                datos.SetearParametro("@Codigo", articuloNuevo.CodigoArticulo);
+                datos.SetearParametro("@Nombre", articuloNuevo.NombreArticulo);
+                datos.SetearParametro("@Descripcion", articuloNuevo.DescripcionArticulo);
+                datos.SetearParametro("@IdMarca", articuloNuevo.MarcaArticulo.Id);
+                datos.SetearParametro("@IdCategoria", articuloNuevo.CategoriaArticulo.Id);
+                datos.SetearParametro("@Precio", articuloNuevo.Precio);
                 datos.EjecutarAccion();
 
             }   
@@ -86,13 +86,13 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("update ARTICULOS set Codigo=@Codigo, Nombre=@Nombre, Descripcion=@Descripcion, IdMarca=@IdMarca, IdCategoria=@IdCategoria, Precio=@Precio where Id=@Id");
-                datos.setearParametro("@Codigo", articuloModificado.CodigoArticulo);
-                datos.setearParametro("@Nombre", articuloModificado.NombreArticulo);
-                datos.setearParametro("@Descripcion", articuloModificado.DescripcionArticulo);
-                datos.setearParametro("@IdMarca", articuloModificado.MarcaArticulo.Id);
-                datos.setearParametro("@IdCategoria", articuloModificado.CategoriaArticulo.Id);
-                datos.setearParametro("@Precio", articuloModificado.Precio);
-                datos.setearParametro("@Id", articuloModificado.IdArticulo);
+                datos.SetearParametro("@Codigo", articuloModificado.CodigoArticulo);
+                datos.SetearParametro("@Nombre", articuloModificado.NombreArticulo);
+                datos.SetearParametro("@Descripcion", articuloModificado.DescripcionArticulo);
+                datos.SetearParametro("@IdMarca", articuloModificado.MarcaArticulo.Id);
+                datos.SetearParametro("@IdCategoria", articuloModificado.CategoriaArticulo.Id);
+                datos.SetearParametro("@Precio", articuloModificado.Precio);
+                datos.SetearParametro("@Id", articuloModificado.IdArticulo);
 
                 datos.EjecutarAccion();
 
@@ -114,7 +114,7 @@ namespace Negocio
             {
                 AccesoDatos datos = new AccesoDatos();
                 datos.SetearConsulta("delete from ARTICULOS where Id=@Id");
-                datos.setearParametro("@Id", idArticulo);
+                datos.SetearParametro("@Id", idArticulo);
                 datos.EjecutarAccion();
 
             }

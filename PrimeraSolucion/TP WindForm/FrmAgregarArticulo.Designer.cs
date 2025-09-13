@@ -35,16 +35,17 @@
             this.LblMarcaArticulo = new System.Windows.Forms.Label();
             this.LblCategoriaArticulo = new System.Windows.Forms.Label();
             this.LblPrecioArticulo = new System.Windows.Forms.Label();
-            this.LblImagenArticulo = new System.Windows.Forms.Label();
             this.txtNombreArticulo = new System.Windows.Forms.TextBox();
             this.txtDescripcionArticulo = new System.Windows.Forms.TextBox();
             this.cboMarcaArticulo = new System.Windows.Forms.ComboBox();
             this.cboCategoriaArticulo = new System.Windows.Forms.ComboBox();
             this.txtPrecioArticulo = new System.Windows.Forms.TextBox();
-            this.txtUrlImagenArticulo = new System.Windows.Forms.TextBox();
-            this.PtbImagenArticulo = new System.Windows.Forms.PictureBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.PtbImagenArticulo = new System.Windows.Forms.PictureBox();
+            this.LblImagenArticulo = new System.Windows.Forms.Label();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
+            this.btnEliminarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PtbImagenArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,16 +117,6 @@
             this.LblPrecioArticulo.TabIndex = 6;
             this.LblPrecioArticulo.Text = "Precio";
             // 
-            // LblImagenArticulo
-            // 
-            this.LblImagenArticulo.AutoSize = true;
-            this.LblImagenArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblImagenArticulo.Location = new System.Drawing.Point(35, 275);
-            this.LblImagenArticulo.Name = "LblImagenArticulo";
-            this.LblImagenArticulo.Size = new System.Drawing.Size(72, 16);
-            this.LblImagenArticulo.TabIndex = 7;
-            this.LblImagenArticulo.Text = "Url Imagen";
-            // 
             // txtNombreArticulo
             // 
             this.txtNombreArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -170,25 +161,6 @@
             this.txtPrecioArticulo.Size = new System.Drawing.Size(123, 22);
             this.txtPrecioArticulo.TabIndex = 5;
             // 
-            // txtUrlImagenArticulo
-            // 
-            this.txtUrlImagenArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUrlImagenArticulo.Location = new System.Drawing.Point(113, 267);
-            this.txtUrlImagenArticulo.Name = "txtUrlImagenArticulo";
-            this.txtUrlImagenArticulo.Size = new System.Drawing.Size(303, 22);
-            this.txtUrlImagenArticulo.TabIndex = 6;
-            // 
-            // PtbImagenArticulo
-            // 
-            this.PtbImagenArticulo.Location = new System.Drawing.Point(475, 29);
-            this.PtbImagenArticulo.MaximumSize = new System.Drawing.Size(311, 262);
-            this.PtbImagenArticulo.MinimumSize = new System.Drawing.Size(311, 262);
-            this.PtbImagenArticulo.Name = "PtbImagenArticulo";
-            this.PtbImagenArticulo.Size = new System.Drawing.Size(311, 262);
-            this.PtbImagenArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PtbImagenArticulo.TabIndex = 14;
-            this.PtbImagenArticulo.TabStop = false;
-            // 
             // btnAceptar
             // 
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -211,15 +183,56 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // PtbImagenArticulo
+            // 
+            this.PtbImagenArticulo.Location = new System.Drawing.Point(475, 29);
+            this.PtbImagenArticulo.MaximumSize = new System.Drawing.Size(311, 262);
+            this.PtbImagenArticulo.MinimumSize = new System.Drawing.Size(311, 262);
+            this.PtbImagenArticulo.Name = "PtbImagenArticulo";
+            this.PtbImagenArticulo.Size = new System.Drawing.Size(311, 262);
+            this.PtbImagenArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PtbImagenArticulo.TabIndex = 14;
+            this.PtbImagenArticulo.TabStop = false;
+            // 
+            // LblImagenArticulo
+            // 
+            this.LblImagenArticulo.AutoSize = true;
+            this.LblImagenArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblImagenArticulo.Location = new System.Drawing.Point(53, 275);
+            this.LblImagenArticulo.Name = "LblImagenArticulo";
+            this.LblImagenArticulo.Size = new System.Drawing.Size(52, 16);
+            this.LblImagenArticulo.TabIndex = 7;
+            this.LblImagenArticulo.Text = "Imagen";
+            // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(113, 268);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarImagen.TabIndex = 15;
+            this.btnAgregarImagen.Text = "Agregar";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
+            // btnEliminarImagen
+            // 
+            this.btnEliminarImagen.Location = new System.Drawing.Point(200, 268);
+            this.btnEliminarImagen.Name = "btnEliminarImagen";
+            this.btnEliminarImagen.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarImagen.TabIndex = 16;
+            this.btnEliminarImagen.Text = "Eliminar";
+            this.btnEliminarImagen.UseVisualStyleBackColor = true;
+            // 
             // FrmAgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 450);
+            this.Controls.Add(this.btnEliminarImagen);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.PtbImagenArticulo);
-            this.Controls.Add(this.txtUrlImagenArticulo);
             this.Controls.Add(this.txtPrecioArticulo);
             this.Controls.Add(this.cboCategoriaArticulo);
             this.Controls.Add(this.cboMarcaArticulo);
@@ -254,15 +267,16 @@
         private System.Windows.Forms.Label LblMarcaArticulo;
         private System.Windows.Forms.Label LblCategoriaArticulo;
         private System.Windows.Forms.Label LblPrecioArticulo;
-        private System.Windows.Forms.Label LblImagenArticulo;
         private System.Windows.Forms.TextBox txtNombreArticulo;
         private System.Windows.Forms.TextBox txtDescripcionArticulo;
         private System.Windows.Forms.ComboBox cboMarcaArticulo;
         private System.Windows.Forms.ComboBox cboCategoriaArticulo;
         private System.Windows.Forms.TextBox txtPrecioArticulo;
-        private System.Windows.Forms.TextBox txtUrlImagenArticulo;
-        private System.Windows.Forms.PictureBox PtbImagenArticulo;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.PictureBox PtbImagenArticulo;
+        private System.Windows.Forms.Label LblImagenArticulo;
+        private System.Windows.Forms.Button btnAgregarImagen;
+        private System.Windows.Forms.Button btnEliminarImagen;
     }
 }
