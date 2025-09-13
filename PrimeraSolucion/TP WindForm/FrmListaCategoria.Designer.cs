@@ -32,6 +32,8 @@
             this.BtnAgregarCategoria = new System.Windows.Forms.Button();
             this.BtnModificarCategoria = new System.Windows.Forms.Button();
             this.BtnEliminarCategoria = new System.Windows.Forms.Button();
+            this.lblFiltro = new System.Windows.Forms.Label();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCategorias)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,20 +81,42 @@
             this.BtnEliminarCategoria.UseVisualStyleBackColor = true;
             this.BtnEliminarCategoria.Click += new System.EventHandler(this.BtnEliminarCategoria_Click);
             // 
+            // lblFiltro
+            // 
+            this.lblFiltro.AutoSize = true;
+            this.lblFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFiltro.Location = new System.Drawing.Point(72, 50);
+            this.lblFiltro.Name = "lblFiltro";
+            this.lblFiltro.Size = new System.Drawing.Size(100, 31);
+            this.lblFiltro.TabIndex = 4;
+            this.lblFiltro.Text = "Filtrar:";
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltro.Location = new System.Drawing.Point(198, 50);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(391, 38);
+            this.txtFiltro.TabIndex = 5;
+            this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
+            // 
             // FrmListaCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 831);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.BtnEliminarCategoria);
             this.Controls.Add(this.BtnModificarCategoria);
             this.Controls.Add(this.BtnAgregarCategoria);
             this.Controls.Add(this.DgvCategorias);
             this.Name = "FrmListaCategoria";
-            this.Text = "FrmListaCategoria";
+            this.Text = "Categorías";
             this.Load += new System.EventHandler(this.FrmListaCategoria_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvCategorias)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -102,5 +126,7 @@
         private System.Windows.Forms.Button BtnAgregarCategoria;
         private System.Windows.Forms.Button BtnModificarCategoria;
         private System.Windows.Forms.Button BtnEliminarCategoria;
+        private System.Windows.Forms.Label lblFiltro;
+        private System.Windows.Forms.TextBox txtFiltro;
     }
 }

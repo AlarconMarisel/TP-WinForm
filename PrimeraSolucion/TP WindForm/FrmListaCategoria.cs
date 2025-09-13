@@ -23,6 +23,7 @@ namespace TP_WindForm
         {
             InitializeComponent();
             configurarDataTable();
+            configurarFiltro();
         }
 
         private void configurarDataTable()
@@ -153,5 +154,54 @@ namespace TP_WindForm
                 DgvCategorias.Cursor = Cursors.Default;
             }
         }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text == "Escriba para filtrar categorías...")
+            {
+                dataTable.DefaultView.RowFilter = "";
+                return;
+            }
+
+            string filtro = txtFiltro.Text.Trim();
+            
+            if (string.IsNullOrEmpty(filtro))
+            {
+                dataTable.DefaultView.RowFilter = "";
+            }
+            else
+            {
+                string filtroEscapado = filtro.Replace("'", "''");
+                dataTable.DefaultView.RowFilter = $"Descripcion LIKE '%{filtroEscapado}%'";
+            }
+        }
+
+        private void configurarFiltro()
+        {
+            txtFiltro.Text = "Escriba para filtrar categorías...";
+            txtFiltro.ForeColor = System.Drawing.Color.Gray;
+            
+            txtFiltro.Enter += txtFiltro_Enter;
+            txtFiltro.Leave += txtFiltro_Leave;
+        }
+
+        private void txtFiltro_Enter(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text == "Escriba para filtrar categorías...")
+            {
+                txtFiltro.Text = "";
+                txtFiltro.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void txtFiltro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtFiltro.Text))
+            {
+                txtFiltro.Text = "Escriba para filtrar categorías...";
+                txtFiltro.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
     }
 }
