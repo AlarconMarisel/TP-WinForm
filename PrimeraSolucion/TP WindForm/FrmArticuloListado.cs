@@ -13,7 +13,8 @@ using Negocio;
 namespace TP_WindForm
 {
     public partial class FrmArticuloListado : Form
-    {
+    {   
+        List<Articulo> listaArticulos;
         public FrmArticuloListado()
         {
             InitializeComponent();
@@ -22,6 +23,11 @@ namespace TP_WindForm
         private void FrmArticuloListado_Load(object sender, EventArgs e)
         {
             CargarArticulos();
+            cboFiltroArticulos.Items.Add("Código");
+            cboFiltroArticulos.Items.Add("Nombre");
+            cboFiltroArticulos.Items.Add("Marca");
+            cboFiltroArticulos.Items.Add("Categoría");
+            cboFiltroArticulos.Visible = false;
         }
 
         private void btnAgregarArticulo_Click(object sender, EventArgs e)
@@ -67,14 +73,124 @@ namespace TP_WindForm
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                dgvArticulos.DataSource = negocio.listarArticulo();
-                dgvArticulos.Columns["IdArticulo"].Visible = false;
-                dgvArticulos.Columns["DescripcionArticulo"].Visible = false;
+                listaArticulos = negocio.listarArticulo();
+                dgvArticulos.DataSource = listaArticulos;
+                OcultarColumnas();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void OcultarColumnas()
+        {
+            dgvArticulos.Columns["IdArticulo"].Visible = false;
+            dgvArticulos.Columns["DescripcionArticulo"].Visible = false;
+
+        }
+
+        private void CargarArticulosFiltrados(List<Articulo>listaFiltrada)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaFiltrada;
+                OcultarColumnas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string opcion = "";
+            string filtro = txtFiltro.Text.ToLower();
+
+            if(cboFiltroArticulos.SelectedItem != null)
+            {
+                opcion = cboFiltroArticulos.SelectedItem.ToString();
+            }    
+            
+
+            try
+            {
+
+                if (filtro != "")
+                {
+
+                    if (chbFiltroAvanzado.Checked == false)
+                    {               
+                        listaFiltrada = listaArticulos.FindAll(x => x.CodigoArticulo.ToLower().Contains(txtFiltro.Text.ToLower()) || x.NombreArticulo.ToLower().Contains(txtFiltro.Text.ToLower()) || x.MarcaArticulo.Descripcion.ToLower().Contains(txtFiltro.Text.ToLower()) || x.CategoriaArticulo.Descripcion.ToLower().Contains(txtFiltro.Text.ToLower()));
+                        CargarArticulosFiltrados(listaFiltrada);
+                        return;
+                    }
+
+                    switch (opcion)
+                    {
+                        case "Código":
+
+                            listaFiltrada = listaArticulos.FindAll(x => x.CodigoArticulo.ToLower().Contains(filtro));
+                            CargarArticulosFiltrados(listaFiltrada);
+                            break;
+                        case "Nombre":
+
+                            listaFiltrada = listaArticulos.FindAll(x => x.NombreArticulo.ToLower().Contains(filtro));
+                            CargarArticulosFiltrados(listaFiltrada);
+                            break;
+                        case "Marca":
+
+                            listaFiltrada = listaArticulos.FindAll(x => x.MarcaArticulo.Descripcion.ToLower().Contains(filtro));
+                            CargarArticulosFiltrados(listaFiltrada);
+                            break;
+                        case "Categoría":
+
+                            listaFiltrada = listaArticulos.FindAll(x => x.CategoriaArticulo.Descripcion.ToLower().Contains(filtro));
+                            CargarArticulosFiltrados(listaFiltrada);
+                            break;
+                        default:
+
+                            txtFiltro.Text = "";
+                            MessageBox.Show("Debe seleccionar una opción de filtrado");
+                            break;
+
+                    }
+                }
+                else
+                {
+                    listaFiltrada = listaArticulos;
+                    CargarArticulosFiltrados(listaFiltrada);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
+
+        private void chbFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chbFiltroAvanzado.Checked==true)
+            {
+                txtFiltro.Text = "";
+                cboFiltroArticulos.Visible = true;
+            
+            }
+            else
+            {
+                txtFiltro.Text = "";
+                cboFiltroArticulos.Visible = false;
+
+            }
+
         }
     }
 }

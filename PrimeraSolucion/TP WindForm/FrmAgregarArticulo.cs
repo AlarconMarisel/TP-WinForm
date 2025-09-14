@@ -63,10 +63,10 @@ namespace TP_WindForm
                 
                 Close();
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
