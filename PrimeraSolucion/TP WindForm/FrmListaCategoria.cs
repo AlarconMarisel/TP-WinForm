@@ -35,6 +35,8 @@ namespace TP_WindForm
             bindingSource = new BindingSource();
             bindingSource.DataSource = dataTable;
             DgvCategorias.DataSource = bindingSource;
+            
+            DgvCategorias.AllowUserToAddRows = false;
         }
 
         private void cargar()
@@ -56,6 +58,8 @@ namespace TP_WindForm
                 ordenDescendente = false;
                                
                 DgvCategorias.Columns["Id"].Visible = false;
+                
+                DgvCategorias.Columns["Descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
             catch (Exception ex)
             {
