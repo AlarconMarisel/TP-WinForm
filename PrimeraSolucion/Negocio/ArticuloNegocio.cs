@@ -55,7 +55,7 @@ namespace Negocio
 
         }
 
-        public void agregarArticulo(Articulo articuloNuevo)
+        public int agregarArticulo(Articulo articuloNuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -69,6 +69,13 @@ namespace Negocio
                 datos.SetearParametro("@IdCategoria", articuloNuevo.CategoriaArticulo.Id);
                 datos.SetearParametro("@Precio", articuloNuevo.Precio);
                 datos.EjecutarAccion();
+                
+                if (datos.Lector.Read())
+                {
+                    int idGenerado = Convert.ToInt32(datos.Lector[0]);
+                    return idGenerado;
+                }
+                return 0;
 
             }   
             catch (Exception ex)

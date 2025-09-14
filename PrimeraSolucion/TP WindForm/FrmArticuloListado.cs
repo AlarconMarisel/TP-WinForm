@@ -192,5 +192,10 @@ namespace TP_WindForm
             }
 
         }
+
+        private void btnVerDetalleArticulo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -44,8 +44,10 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.PtbImagenArticulo = new System.Windows.Forms.PictureBox();
             this.LblImagenArticulo = new System.Windows.Forms.Label();
-            this.btnAgregarImagen = new System.Windows.Forms.Button();
-            this.btnEliminarImagen = new System.Windows.Forms.Button();
+            this.btnAnteriorImagen = new System.Windows.Forms.Button();
+            this.lblContadorImagenes = new System.Windows.Forms.Label();
+            this.btnSiguienteImagen = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PtbImagenArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -204,32 +206,52 @@
             this.LblImagenArticulo.TabIndex = 7;
             this.LblImagenArticulo.Text = "Imagen";
             // 
-            // btnAgregarImagen
+            // btnAnteriorImagen
             // 
-            this.btnAgregarImagen.Location = new System.Drawing.Point(113, 268);
-            this.btnAgregarImagen.Name = "btnAgregarImagen";
-            this.btnAgregarImagen.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarImagen.TabIndex = 15;
-            this.btnAgregarImagen.Text = "Agregar";
-            this.btnAgregarImagen.UseVisualStyleBackColor = true;
-            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            this.btnAnteriorImagen.Location = new System.Drawing.Point(475, 297);
+            this.btnAnteriorImagen.Name = "btnAnteriorImagen";
+            this.btnAnteriorImagen.Size = new System.Drawing.Size(75, 23);
+            this.btnAnteriorImagen.TabIndex = 18;
+            this.btnAnteriorImagen.Text = "Anterior";
+            this.btnAnteriorImagen.UseVisualStyleBackColor = true;
             // 
-            // btnEliminarImagen
+            // lblContadorImagenes
             // 
-            this.btnEliminarImagen.Location = new System.Drawing.Point(200, 268);
-            this.btnEliminarImagen.Name = "btnEliminarImagen";
-            this.btnEliminarImagen.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminarImagen.TabIndex = 16;
-            this.btnEliminarImagen.Text = "Eliminar";
-            this.btnEliminarImagen.UseVisualStyleBackColor = true;
+            this.lblContadorImagenes.AutoSize = true;
+            this.lblContadorImagenes.Location = new System.Drawing.Point(612, 307);
+            this.lblContadorImagenes.Name = "lblContadorImagenes";
+            this.lblContadorImagenes.Size = new System.Drawing.Size(37, 13);
+            this.lblContadorImagenes.TabIndex = 20;
+            this.lblContadorImagenes.Text = "1 de 1";
+            this.lblContadorImagenes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSiguienteImagen
+            // 
+            this.btnSiguienteImagen.Location = new System.Drawing.Point(711, 297);
+            this.btnSiguienteImagen.Name = "btnSiguienteImagen";
+            this.btnSiguienteImagen.Size = new System.Drawing.Size(75, 23);
+            this.btnSiguienteImagen.TabIndex = 21;
+            this.btnSiguienteImagen.Text = "Siguiente";
+            this.btnSiguienteImagen.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(113, 268);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Agregar/Eliminar";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FrmAgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 450);
-            this.Controls.Add(this.btnEliminarImagen);
-            this.Controls.Add(this.btnAgregarImagen);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSiguienteImagen);
+            this.Controls.Add(this.lblContadorImagenes);
+            this.Controls.Add(this.btnAnteriorImagen);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.PtbImagenArticulo);
@@ -276,7 +298,9 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.PictureBox PtbImagenArticulo;
         private System.Windows.Forms.Label LblImagenArticulo;
-        private System.Windows.Forms.Button btnAgregarImagen;
-        private System.Windows.Forms.Button btnEliminarImagen;
+        private System.Windows.Forms.Button btnAnteriorImagen;
+        private System.Windows.Forms.Label lblContadorImagenes;
+        private System.Windows.Forms.Button btnSiguienteImagen;
+        private System.Windows.Forms.Button button1;
     }
 }

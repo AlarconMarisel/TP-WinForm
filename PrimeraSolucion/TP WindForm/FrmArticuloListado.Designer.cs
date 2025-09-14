@@ -102,6 +102,7 @@
             this.btnVerDetalleArticulo.TabIndex = 5;
             this.btnVerDetalleArticulo.Text = "Ver Detalle";
             this.btnVerDetalleArticulo.UseVisualStyleBackColor = true;
+            this.btnVerDetalleArticulo.Click += new System.EventHandler(this.btnVerDetalleArticulo_Click);
             // 
             // lblFiltroArticulo
             // 
