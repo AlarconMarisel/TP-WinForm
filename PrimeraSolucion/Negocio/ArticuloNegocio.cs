@@ -11,15 +11,13 @@ namespace Negocio
     {
         public List<Articulo> listarArticulo()
         {
-
             List<Articulo> listadoArticulos = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
-            
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
 
             try
             {
-                
-                datos.SetearConsulta("select A.Id, Codigo, Nombre, A.Descripcion, IdMarca, M.Descripcion Marca, IdCategoria, C.Descripcion Categoria, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where IdMarca=M.Id and IdCategoria=C.Id");
+                datos.SetearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, A.IdCategoria, A.Precio, M.Descripcion Marca, C.Descripcion Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -29,30 +27,31 @@ namespace Negocio
                     aux.CodigoArticulo = (string)datos.Lector["Codigo"];
                     aux.NombreArticulo = (string)datos.Lector["Nombre"];
                     aux.DescripcionArticulo = (string)datos.Lector["Descripcion"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
                     aux.MarcaArticulo = new Marca();
                     aux.MarcaArticulo.Id = (int)datos.Lector["IdMarca"];
                     aux.MarcaArticulo.Descripcion = (string)datos.Lector["Marca"];
+
                     aux.CategoriaArticulo = new Categoria();
                     aux.CategoriaArticulo.Id = (int)datos.Lector["IdCategoria"];
                     aux.CategoriaArticulo.Descripcion = (string)datos.Lector["Categoria"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
-                    listadoArticulos.Add(aux);
-             
-                }
 
+                    aux.Imagenes = imagenNegocio.listarImagenesPorArticulo(aux.IdArticulo);
+
+                    listadoArticulos.Add(aux);
+                }
 
                 return listadoArticulos;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
-
         }
 
         public int agregarArticulo(Articulo articuloNuevo)
@@ -61,29 +60,31 @@ namespace Negocio
 
             try
             {
-                datos.SetearConsulta("insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                datos.SetearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio); SELECT SCOPE_IDENTITY();");
                 datos.SetearParametro("@Codigo", articuloNuevo.CodigoArticulo);
                 datos.SetearParametro("@Nombre", articuloNuevo.NombreArticulo);
                 datos.SetearParametro("@Descripcion", articuloNuevo.DescripcionArticulo);
                 datos.SetearParametro("@IdMarca", articuloNuevo.MarcaArticulo.Id);
                 datos.SetearParametro("@IdCategoria", articuloNuevo.CategoriaArticulo.Id);
                 datos.SetearParametro("@Precio", articuloNuevo.Precio);
-                datos.EjecutarAccion();
-                
+
+                datos.EjecutarLectura();
+
                 if (datos.Lector.Read())
                 {
-                    int idGenerado = Convert.ToInt32(datos.Lector[0]);
-                    return idGenerado;
+                    return Convert.ToInt32(datos.Lector[0]);
                 }
-                return 0;
 
+                return 0;
             }   
             catch (Exception ex)
             {
-                    
                 throw ex;   
-            }  
-
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         public void modificarArticulo(Articulo articuloModificado)
@@ -115,22 +116,69 @@ namespace Negocio
 
         }
 
-        public void eliminarArticulo(int idArticulo)
+        public Articulo obtenerArticuloPorId(int idArticulo)
         {
+            AccesoDatos datos = new AccesoDatos();
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+
             try
             {
-                AccesoDatos datos = new AccesoDatos();
-                datos.SetearConsulta("delete from ARTICULOS where Id=@Id");
+                datos.SetearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, A.IdCategoria, A.Precio, M.Descripcion Marca, C.Descripcion Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria AND A.Id = @Id");
                 datos.SetearParametro("@Id", idArticulo);
-                datos.EjecutarAccion();
+                datos.EjecutarLectura();
 
+                if (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.IdArticulo = (int)datos.Lector["Id"];
+                    aux.CodigoArticulo = (string)datos.Lector["Codigo"];
+                    aux.NombreArticulo = (string)datos.Lector["Nombre"];
+                    aux.DescripcionArticulo = (string)datos.Lector["Descripcion"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    aux.MarcaArticulo = new Marca();
+                    aux.MarcaArticulo.Id = (int)datos.Lector["IdMarca"];
+                    aux.MarcaArticulo.Descripcion = (string)datos.Lector["Marca"];
+
+                    aux.CategoriaArticulo = new Categoria();
+                    aux.CategoriaArticulo.Id = (int)datos.Lector["IdCategoria"];
+                    aux.CategoriaArticulo.Descripcion = (string)datos.Lector["Categoria"];
+
+                    aux.Imagenes = imagenNegocio.listarImagenesPorArticulo(aux.IdArticulo);
+
+                    return aux;
+                }
+
+                return null;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-        
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarArticulo(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            
+            try
+            {
+                datos.SetearConsulta("DELETE FROM ARTICULOS WHERE Id = @Id");
+                datos.SetearParametro("@Id", idArticulo);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }
