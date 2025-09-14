@@ -28,80 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblImagen = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnAceptarImagen = new System.Windows.Forms.Button();
-            this.btnCancelarImagen = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lblUrlImagen = new System.Windows.Forms.Label();
+            this.txtUrlImagen = new System.Windows.Forms.TextBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.dgvImagenes = new System.Windows.Forms.DataGridView();
+            this.pictureBoxImagen = new System.Windows.Forms.PictureBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvImagenes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagen)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblImagen
-            // 
-            this.lblImagen.AutoSize = true;
-            this.lblImagen.Location = new System.Drawing.Point(34, 40);
-            this.lblImagen.Name = "lblImagen";
-            this.lblImagen.Size = new System.Drawing.Size(58, 13);
-            this.lblImagen.TabIndex = 0;
-            this.lblImagen.Text = "Url Imagen";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(98, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(340, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(37, 99);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(401, 296);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnAceptarImagen
-            // 
-            this.btnAceptarImagen.Location = new System.Drawing.Point(109, 419);
-            this.btnAceptarImagen.Name = "btnAceptarImagen";
-            this.btnAceptarImagen.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptarImagen.TabIndex = 3;
-            this.btnAceptarImagen.Text = "Aceptar";
-            this.btnAceptarImagen.UseVisualStyleBackColor = true;
-            // 
-            // btnCancelarImagen
-            // 
-            this.btnCancelarImagen.Location = new System.Drawing.Point(283, 419);
-            this.btnCancelarImagen.Name = "btnCancelarImagen";
-            this.btnCancelarImagen.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelarImagen.TabIndex = 4;
-            this.btnCancelarImagen.Text = "Cancelar";
-            this.btnCancelarImagen.UseVisualStyleBackColor = true;
-            // 
+
+            // lblUrlImagen
+            this.lblUrlImagen.AutoSize = true;
+            this.lblUrlImagen.Location = new System.Drawing.Point(20, 20);
+            this.lblUrlImagen.Name = "lblUrlImagen";
+            this.lblUrlImagen.Size = new System.Drawing.Size(80, 13);
+            this.lblUrlImagen.TabIndex = 0;
+            this.lblUrlImagen.Text = "URL de Imagen:";
+
+            // txtUrlImagen
+            this.txtUrlImagen.Location = new System.Drawing.Point(20, 40);
+            this.txtUrlImagen.Name = "txtUrlImagen";
+            this.txtUrlImagen.Size = new System.Drawing.Size(400, 20);
+            this.txtUrlImagen.TabIndex = 1;
+
+            // btnAgregar
+            this.btnAgregar.Location = new System.Drawing.Point(20, 70);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+
+            // btnLimpiar
+            this.btnLimpiar.Location = new System.Drawing.Point(105, 70);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 3;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+
+            // dgvImagenes
+            this.dgvImagenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvImagenes.Location = new System.Drawing.Point(20, 110);
+            this.dgvImagenes.Name = "dgvImagenes";
+            this.dgvImagenes.Size = new System.Drawing.Size(300, 200);
+            this.dgvImagenes.TabIndex = 4;
+            this.dgvImagenes.SelectionChanged += new System.EventHandler(this.dgvImagenes_SelectionChanged);
+
+            // pictureBoxImagen
+            this.pictureBoxImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxImagen.Location = new System.Drawing.Point(340, 110);
+            this.pictureBoxImagen.Name = "pictureBoxImagen";
+            this.pictureBoxImagen.Size = new System.Drawing.Size(200, 200);
+            this.pictureBoxImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxImagen.TabIndex = 5;
+            this.pictureBoxImagen.TabStop = false;
+
+            // btnEliminar
+            this.btnEliminar.Location = new System.Drawing.Point(20, 320);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 6;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Visible = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+
+            // btnCerrar
+            this.btnCerrar.Location = new System.Drawing.Point(465, 320);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(75, 23);
+            this.btnCerrar.TabIndex = 7;
+            this.btnCerrar.Text = "Cerrar";
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+
             // FrmAgregarImagen
-            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 466);
-            this.Controls.Add(this.btnCancelarImagen);
-            this.Controls.Add(this.btnAceptarImagen);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.lblImagen);
+            this.ClientSize = new System.Drawing.Size(600, 340);
+            this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.pictureBoxImagen);
+            this.Controls.Add(this.dgvImagenes);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.txtUrlImagen);
+            this.Controls.Add(this.lblUrlImagen);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmAgregarImagen";
-            this.Text = "Agregar Imagen";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Gestionar Imágenes";
+            this.Load += new System.EventHandler(this.FrmAgregarImagen_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvImagenes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblImagen;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnAceptarImagen;
-        private System.Windows.Forms.Button btnCancelarImagen;
+        private System.Windows.Forms.Label lblUrlImagen;
+        private System.Windows.Forms.TextBox txtUrlImagen;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.DataGridView dgvImagenes;
+        private System.Windows.Forms.PictureBox pictureBoxImagen;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnCerrar;
     }
 }
