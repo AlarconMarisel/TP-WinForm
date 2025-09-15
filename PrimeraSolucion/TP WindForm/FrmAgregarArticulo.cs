@@ -101,14 +101,29 @@ namespace TP_WindForm
                 if (articulo != null)  
                 {
                     Text = "Modificar Artículo";
+                    button1.Text = "Agregar/Eliminar";
                     txtCodigoArticulo.Text = articulo.CodigoArticulo;
                     txtNombreArticulo.Text = articulo.NombreArticulo;
                     txtDescripcionArticulo.Text = articulo.DescripcionArticulo;
                     cboMarcaArticulo.SelectedValue = articulo.MarcaArticulo.Id;
                     cboCategoriaArticulo.SelectedValue = articulo.CategoriaArticulo.Id;
                     txtPrecioArticulo.Text = articulo.Precio.ToString();
+                    
+                    // Cargar imágenes del artículo si no están cargadas
+                    if (articulo.Imagenes == null)
+                    {
+                        ImagenNegocio imagenNegocio = new ImagenNegocio();
+                        articulo.Imagenes = imagenNegocio.listarImagenesPorArticulo(articulo.IdArticulo);
+                    }
+                    
+                    // Mostrar la primera imagen y configurar navegación
+                    CargarImagenActual();
                 }
-
+                else
+                {
+                    Text = "Nuevo Artículo";
+                    button1.Text = "Agregar";
+                }
             }
             catch (Exception ex)
             {
@@ -118,8 +133,40 @@ namespace TP_WindForm
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
-            FrmAgregarImagen agregarImagen = new FrmAgregarImagen();
-            agregarImagen.ShowDialog();
+            try
+            {
+                // Si es un artículo nuevo (sin ID), guardarlo temporalmente
+                if (articulo == null || articulo.IdArticulo == 0)
+                {
+                    if (!ValidarCampos())
+                    {
+                        MessageBox.Show("Debe completar todos los campos obligatorios antes de agregar imágenes.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Guardar el artículo temporalmente sin cerrar el formulario
+                    if (!GuardarArticuloTemporal())
+                    {
+                        return; // Si hay error, no continuar
+                    }
+                }
+
+                FrmAgregarImagen gestionarImagenes = new FrmAgregarImagen(articulo);
+                gestionarImagenes.ShowDialog();
+                
+                // Recargar imágenes después de cerrar el formulario de gestión
+                if (articulo != null)
+                {
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    articulo.Imagenes = imagenNegocio.listarImagenesPorArticulo(articulo.IdArticulo);
+                    indiceImagenActual = 0; // Volver a la primera imagen
+                    CargarImagenActual();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir el gestor de imágenes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private bool ValidarCampos()
@@ -173,6 +220,85 @@ namespace TP_WindForm
             {
                 MessageBox.Show("Error al guardar el artículo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+        private void CargarImagenActual()
+        {
+            try
+            {
+                if (articulo != null && articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                {
+                    if (indiceImagenActual >= 0 && indiceImagenActual < articulo.Imagenes.Count)
+                    {
+                        string urlImagen = articulo.Imagenes[indiceImagenActual].ImagenUrl;
+                        if (!string.IsNullOrWhiteSpace(urlImagen) && Uri.IsWellFormedUriString(urlImagen, UriKind.Absolute))
+                        {
+                            PtbImagenArticulo.Load(urlImagen);
+                            PtbImagenArticulo.SizeMode = PictureBoxSizeMode.Zoom;
+                        }
+                        else
+                        {
+                            LimpiarPictureBox();
+                        }
+                    }
+                    else
+                    {
+                        LimpiarPictureBox();
+                    }
+                    
+                    // Actualizar contador
+                    lblContadorImagenes.Text = $"{indiceImagenActual + 1} de {articulo.Imagenes.Count}";
+                    
+                    // Configurar botones de navegación
+                    btnAnteriorImagen.Enabled = indiceImagenActual > 0;
+                    btnSiguienteImagen.Enabled = indiceImagenActual < articulo.Imagenes.Count - 1;
+                }
+                else
+                {
+                    // No hay imágenes
+                    LimpiarPictureBox();
+                    lblContadorImagenes.Text = "Sin imágenes";
+                    btnAnteriorImagen.Enabled = false;
+                    btnSiguienteImagen.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LimpiarPictureBox();
+                lblContadorImagenes.Text = "Error al cargar";
+                btnAnteriorImagen.Enabled = false;
+                btnSiguienteImagen.Enabled = false;
+            }
+        }
+
+        private void LimpiarPictureBox()
+        {
+            PtbImagenArticulo.Image = null;
+            PtbImagenArticulo.BackColor = Color.LightGray;
+        }
+
+        private void btnAnteriorImagen_Click(object sender, EventArgs e)
+        {
+            if (articulo != null && articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+            {
+                if (indiceImagenActual > 0)
+                {
+                    indiceImagenActual--;
+                    CargarImagenActual();
+                }
+            }
+        }
+
+        private void btnSiguienteImagen_Click(object sender, EventArgs e)
+        {
+            if (articulo != null && articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+            {
+                if (indiceImagenActual < articulo.Imagenes.Count - 1)
+                {
+                    indiceImagenActual++;
+                    CargarImagenActual();
+                }
             }
         }
     }

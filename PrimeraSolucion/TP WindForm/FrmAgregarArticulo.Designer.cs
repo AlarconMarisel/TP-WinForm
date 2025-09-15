@@ -181,7 +181,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(145, 38);
             this.btnCancelar.TabIndex = 8;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -214,6 +214,7 @@
             this.btnAnteriorImagen.TabIndex = 18;
             this.btnAnteriorImagen.Text = "Anterior";
             this.btnAnteriorImagen.UseVisualStyleBackColor = true;
+            this.btnAnteriorImagen.Click += new System.EventHandler(this.btnAnteriorImagen_Click);
             // 
             // lblContadorImagenes
             // 
@@ -233,15 +234,17 @@
             this.btnSiguienteImagen.TabIndex = 21;
             this.btnSiguienteImagen.Text = "Siguiente";
             this.btnSiguienteImagen.UseVisualStyleBackColor = true;
+            this.btnSiguienteImagen.Click += new System.EventHandler(this.btnSiguienteImagen_Click);
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(113, 268);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.Size = new System.Drawing.Size(120, 23);
             this.button1.TabIndex = 22;
             this.button1.Text = "Agregar/Eliminar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnAgregarImagen_Click);
             // 
             // FrmAgregarArticulo
             // 
