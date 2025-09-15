@@ -195,7 +195,34 @@ namespace TP_WindForm
 
         private void btnVerDetalleArticulo_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (dgvArticulos.CurrentRow != null)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    
+                    Articulo articuloCompleto = negocio.obtenerArticuloPorId(articuloSeleccionado.IdArticulo);
+                    
+                    if (articuloCompleto != null)
+                    {
+                        FrmArticuloDetalle detalle = new FrmArticuloDetalle(articuloCompleto);
+                        detalle.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo cargar los detalles del artículo seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor seleccione un artículo para ver sus detalles.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir los detalles del artículo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
