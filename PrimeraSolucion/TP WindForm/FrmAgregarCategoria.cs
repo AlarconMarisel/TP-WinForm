@@ -54,7 +54,7 @@ namespace TP_WindForm
                 {
                     Categoria nuevo = new Categoria();
                     nuevo.Descripcion = nuevoNombre;
-                    negocio.agregar(nuevo);
+                    negocio.agregarCategoria(nuevo);
                     MessageBox.Show("Categoría agregada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -66,7 +66,7 @@ namespace TP_WindForm
                     }
 
                     categoria.Descripcion = nuevoNombre;
-                    negocio.modificar(categoria);                
+                    negocio.modificarCategoria(categoria);                
                     MessageBox.Show("Categoría modificada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 

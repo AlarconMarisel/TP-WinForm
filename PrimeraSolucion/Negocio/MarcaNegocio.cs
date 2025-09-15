@@ -12,7 +12,7 @@ namespace Negocio
     public class MarcaNegocio
     {
 
-        public List<Marca> ListaMarca()
+        public List<Marca> listarMarca()
         {
 
             List<Marca> lista = new List<Marca>();
@@ -35,19 +35,23 @@ namespace Negocio
                 return lista;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
             }
 
         }
-        public void agregar(Marca nuevo)
+        public void agregarMarca(Marca nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearConsulta("INSERT INTO MARCAS (Descripcion) VALUES ('" + nuevo.Descripcion + "')");
+                datos.SetearConsulta("INSERT INTO MARCAS (Descripcion) VALUES (@Descripcion)");
+                datos.SetearParametro("@Descripcion", nuevo.Descripcion);
                 datos.EjecutarAccion();
             }
             catch (Exception ex)
@@ -59,15 +63,14 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void modificar(Marca marca)
+        public void modificarMarca(Marca marca)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.SetearConsulta("UPDATE MARCAS SET Descripcion = @Descripcion WHERE Id = @Id");
-                datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@Descripcion", marca.Descripcion);
-                datos.Comando.Parameters.AddWithValue("@Id", marca.Id);
+                datos.SetearParametro("@Descripcion", marca.Descripcion);
+                datos.SetearParametro("@Id", marca.Id);
                 datos.EjecutarAccion();
             }
             catch (Exception ex)
@@ -80,19 +83,22 @@ namespace Negocio
             }
         }
 
-        public void eliminar(Marca marca)
+        public void eliminarMarca(Marca marca)
         {
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                AccesoDatos datos = new AccesoDatos();
                 datos.SetearConsulta("delete from MARCAS where Id = @Id");
                 datos.SetearParametro("@Id", marca.Id);
                 datos.EjecutarAccion();
             }
             catch (Exception ex)
             {
-
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

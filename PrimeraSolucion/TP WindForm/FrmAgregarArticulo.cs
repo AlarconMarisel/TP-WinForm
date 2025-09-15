@@ -36,7 +36,6 @@ namespace TP_WindForm
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            // Validar campos antes de proceder
 
             try
             {
@@ -91,7 +90,7 @@ namespace TP_WindForm
 
             try
             {
-                cboMarcaArticulo.DataSource = marcaNegocio.ListaMarca();
+                cboMarcaArticulo.DataSource = marcaNegocio.listarMarca();
                 cboMarcaArticulo.ValueMember = "Id";
                 cboMarcaArticulo.DisplayMember = "Descripcion";
                 cboCategoriaArticulo.DataSource = categoriaNegocio.listarCategoria();
@@ -109,14 +108,12 @@ namespace TP_WindForm
                     cboCategoriaArticulo.SelectedValue = articulo.CategoriaArticulo.Id;
                     txtPrecioArticulo.Text = articulo.Precio.ToString();
                     
-                    // Cargar imágenes del artículo si no están cargadas
                     if (articulo.Imagenes == null)
                     {
                         ImagenNegocio imagenNegocio = new ImagenNegocio();
                         articulo.Imagenes = imagenNegocio.listarImagenesPorArticulo(articulo.IdArticulo);
                     }
                     
-                    // Mostrar la primera imagen y configurar navegación
                     CargarImagenActual();
                 }
                 else
@@ -135,7 +132,6 @@ namespace TP_WindForm
         {
             try
             {
-                // Si es un artículo nuevo (sin ID), guardarlo temporalmente
                 if (articulo == null || articulo.IdArticulo == 0)
                 {
                     if (!ValidarCampos())
@@ -144,22 +140,20 @@ namespace TP_WindForm
                         return;
                     }
 
-                    // Guardar el artículo temporalmente sin cerrar el formulario
                     if (!GuardarArticuloTemporal())
                     {
-                        return; // Si hay error, no continuar
+                        return;
                     }
                 }
 
                 FrmAgregarImagen gestionarImagenes = new FrmAgregarImagen(articulo);
                 gestionarImagenes.ShowDialog();
                 
-                // Recargar imágenes después de cerrar el formulario de gestión
                 if (articulo != null)
                 {
                     ImagenNegocio imagenNegocio = new ImagenNegocio();
                     articulo.Imagenes = imagenNegocio.listarImagenesPorArticulo(articulo.IdArticulo);
-                    indiceImagenActual = 0; // Volver a la primera imagen
+                    indiceImagenActual = 0;
                     CargarImagenActual();
                 }
             }
@@ -181,7 +175,6 @@ namespace TP_WindForm
                 return false;
             }
 
-            // Validar que el precio sea un número válido
             decimal precio;
             if (!decimal.TryParse(txtPrecioArticulo.Text, out precio))
             {
@@ -200,7 +193,6 @@ namespace TP_WindForm
                 if (articulo == null)
                     articulo = new Articulo();
 
-                // Asignar los valores de los controles al artículo
                 articulo.CodigoArticulo = txtCodigoArticulo.Text;
                 articulo.NombreArticulo = txtNombreArticulo.Text;
                 articulo.DescripcionArticulo = txtDescripcionArticulo.Text;
@@ -208,10 +200,9 @@ namespace TP_WindForm
                 articulo.CategoriaArticulo = (Categoria)cboCategoriaArticulo.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecioArticulo.Text);
 
-                // Guardar el artículo y obtener el ID
                 int idGenerado = negocio.agregarArticulo(articulo);
                 articulo.IdArticulo = idGenerado;
-                articuloGuardadoTemporalmente = true; // Marcar que fue guardado temporalmente
+                articuloGuardadoTemporalmente = true;
 
                 MessageBox.Show("Artículo guardado temporalmente. Ahora puede agregar imágenes.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
@@ -247,16 +238,13 @@ namespace TP_WindForm
                         LimpiarPictureBox();
                     }
                     
-                    // Actualizar contador
                     lblContadorImagenes.Text = $"{indiceImagenActual + 1} de {articulo.Imagenes.Count}";
                     
-                    // Configurar botones de navegación
                     btnAnteriorImagen.Enabled = indiceImagenActual > 0;
                     btnSiguienteImagen.Enabled = indiceImagenActual < articulo.Imagenes.Count - 1;
                 }
                 else
                 {
-                    // No hay imágenes
                     LimpiarPictureBox();
                     lblContadorImagenes.Text = "Sin imágenes";
                     btnAnteriorImagen.Enabled = false;

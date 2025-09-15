@@ -41,13 +41,13 @@ namespace TP_WindForm
                 {
                     Marca nuevo = new Marca();
                     nuevo.Descripcion = txtNombreMarca.Text;
-                    negocio.agregar(nuevo);
+                    negocio.agregarMarca(nuevo);
                     MessageBox.Show("Agregado exitosamente");
                 }
                 else 
                 {
                     marca.Descripcion = txtNombreMarca.Text;
-                    negocio.modificar(marca);                
+                    negocio.modificarMarca(marca);                
                     MessageBox.Show("Modificado exitosamente");
                 }
 

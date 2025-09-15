@@ -29,7 +29,7 @@ namespace TP_WindForm
             MarcaNegocio datos = new MarcaNegocio();
             try
             {
-                listaMarcas = datos.ListaMarca();
+                listaMarcas = datos.listarMarca();
                 ocultarColumnas();
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace TP_WindForm
                 if (confirm == DialogResult.Yes)
                 {
                     MarcaNegocio negocio = new MarcaNegocio();
-                    negocio.eliminar(seleccionado);
+                    negocio.eliminarMarca(seleccionado);
                     MessageBox.Show("Marca eliminada correctamente.");
                     cargar();
                 }

@@ -140,7 +140,7 @@
             this.chbFiltroAvanzado.Name = "chbFiltroAvanzado";
             this.chbFiltroAvanzado.Size = new System.Drawing.Size(93, 17);
             this.chbFiltroAvanzado.TabIndex = 9;
-            this.chbFiltroAvanzado.Text = "Filtro Avazado";
+            this.chbFiltroAvanzado.Text = "Filtro Avanzado";
             this.chbFiltroAvanzado.UseVisualStyleBackColor = true;
             this.chbFiltroAvanzado.CheckedChanged += new System.EventHandler(this.chbFiltroAvanzado_CheckedChanged);
             // 

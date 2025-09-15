@@ -31,12 +31,13 @@ namespace Negocio
 
                 throw ex;
             }
-            finally { 
+            finally 
+            { 
                 datos.cerrarConexion();
             }
         }
 
-        public void agregar(Categoria nuevo)
+        public void agregarCategoria(Categoria nuevo)
         {
             
             if (existeCategoria(nuevo.Descripcion))
@@ -48,7 +49,7 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("insert into CATEGORIAS values (@descripcion)");
-                datos.Comando.Parameters.AddWithValue("@descripcion", nuevo.Descripcion);
+                datos.SetearParametro("@descripcion", nuevo.Descripcion);
                 datos.EjecutarAccion();
             }
             catch (Exception ex)
@@ -61,7 +62,7 @@ namespace Negocio
             }
         }
 
-        public void modificar(Categoria categoria)
+        public void modificarCategoria(Categoria categoria)
         {
             
             Categoria categoriaOriginal = obtenerCategoriaPorId(categoria.Id);
@@ -82,8 +83,8 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("update CATEGORIAS set Descripcion = @descripcion where Id = @id");
-                datos.Comando.Parameters.AddWithValue("@descripcion", categoria.Descripcion);
-                datos.Comando.Parameters.AddWithValue("@id", categoria.Id);
+                datos.SetearParametro("@descripcion", categoria.Descripcion);
+                datos.SetearParametro("@id", categoria.Id);
                 datos.EjecutarAccion();
             }
             catch (Exception ex)
@@ -96,20 +97,18 @@ namespace Negocio
             }
         }
 
-        public void eliminar(int id)
+        public void eliminarCategoria(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {             
                 datos.SetearConsulta("SELECT COUNT(*) FROM ARTICULOS WHERE IdCategoria = @Id");
-                datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@Id", id);
+                datos.SetearParametro("@Id", id);
                 datos.EjecutarLectura();
                 
                 if (datos.Lector.Read())
                 {
                     int cantidadArticulos = (int)datos.Lector[0];
-                    datos.cerrarConexion();
                     
                     if (cantidadArticulos > 0)
                     {
@@ -117,23 +116,18 @@ namespace Negocio
                                           cantidadArticulos + " artículo(s) de la misma.");
                     }
                 }
-                else
-                {
-                    datos.cerrarConexion();
-                }
                 
-                datos.SetearConsulta("DELETE FROM CATEGORIAS WHERE Id = @Id");
-                datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@Id", id);
-                datos.EjecutarAccion();
+                datos.cerrarConexion();
+                
+                AccesoDatos datos2 = new AccesoDatos();
+                datos2.SetearConsulta("DELETE FROM CATEGORIAS WHERE Id = @Id");
+                datos2.SetearParametro("@Id", id);
+                datos2.EjecutarAccion();
+                datos2.cerrarConexion();
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
             }
         }
 
@@ -144,7 +138,7 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("select count(*) from CATEGORIAS where UPPER(Descripcion) = UPPER(@descripcion)");
-                datos.Comando.Parameters.AddWithValue("@descripcion", descripcion);
+                datos.SetearParametro("@descripcion", descripcion);
                 datos.EjecutarLectura();
                 
                 if (datos.Lector.Read())
@@ -170,8 +164,8 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("select count(*) from CATEGORIAS where Descripcion = @descripcion and Id != @id");
-                datos.Comando.Parameters.AddWithValue("@descripcion", descripcion);
-                datos.Comando.Parameters.AddWithValue("@id", idExcluir);
+                datos.SetearParametro("@descripcion", descripcion);
+                datos.SetearParametro("@id", idExcluir);
                 datos.EjecutarLectura();
                 
                 if (datos.Lector.Read())
@@ -197,7 +191,7 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("select * from CATEGORIAS where Id = @id");
-                datos.Comando.Parameters.AddWithValue("@id", id);
+                datos.SetearParametro("@id", id);
                 datos.EjecutarLectura();
                 
                 if (datos.Lector.Read())

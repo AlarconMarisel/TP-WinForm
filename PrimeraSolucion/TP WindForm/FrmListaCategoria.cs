@@ -112,7 +112,7 @@ namespace TP_WindForm
                     
                     if (respuesta == DialogResult.Yes)
                     {
-                        negocio.eliminar(idCategoria);
+                        negocio.eliminarCategoria(idCategoria);
                         MessageBox.Show("Categoría eliminada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         cargar();
                     }
