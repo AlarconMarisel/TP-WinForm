@@ -35,6 +35,16 @@ namespace TP_WindForm
         {
             MarcaNegocio negocio = new MarcaNegocio();
 
+            string nuevoNombre = txtNombreMarca.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nuevoNombre))
+            {
+                MessageBox.Show("Debe ingresar un nombre para la Marca.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNombreMarca.Focus();
+                return;
+            }
+
+
             try
             {
                 if (marca == null) 
@@ -46,7 +56,14 @@ namespace TP_WindForm
                 }
                 else 
                 {
-                    marca.Descripcion = txtNombreMarca.Text;
+                    if (marca.Descripcion == nuevoNombre)
+                    {
+                        MessageBox.Show("No se realizaron cambios en la Marca.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+
+                    }
+
+                        marca.Descripcion = txtNombreMarca.Text;
                     negocio.modificarMarca(marca);                
                     MessageBox.Show("Modificado exitosamente");
                 }
